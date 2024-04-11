@@ -106,22 +106,14 @@ class SongController extends Controller
         ]);
 
 
-        $found = Song::where('title', $request->title)->where('artist', $request->artist)->count();
-        if (!$found) {
-            $song->update($request->all());
-            return [
-                "status" => 1,
-                "data" => $song,
-                "message" => "Song updated successfully",
-                "success" => true
-            ];
-        } else {
-            return [
-                "status" => 0,
-                "message" => "Song already exists",
-                "success" => false
-            ];
-        }
+
+        $song->update($request->all());
+        return [
+            "status" => 1,
+            "data" => $song,
+            "message" => "Song updated successfully",
+            "success" => true
+        ];
     }
 
     /**
