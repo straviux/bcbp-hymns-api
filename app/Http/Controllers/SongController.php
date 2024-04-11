@@ -15,9 +15,13 @@ class SongController extends Controller
     public function index()
     {
         $songs = Song::get();
+        $lastUpated = Song::orderBy('updated_at', 'DESC')->first()->updated_at;
         return [
             "status" => 1,
-            "data" => $songs
+            "data" => $songs,
+            "last_update" => \Carbon\Carbon::parse(
+                $lastUpated
+            )->format('Y-m-d H:i:s')
         ];
     }
 
