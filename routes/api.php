@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('songs', SongController::class);
+Route::get('last-update', [SongController::class, 'getLastUpdateDate']);

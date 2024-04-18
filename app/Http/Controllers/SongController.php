@@ -15,12 +15,12 @@ class SongController extends Controller
     public function index()
     {
         $songs = Song::get();
-        $lastUpated = Song::orderBy('updated_at', 'DESC')->first()->updated_at;
+        $lastUpdated = Song::orderBy('updated_at', 'DESC')->first()->updated_at;
         return [
             "status" => 1,
             "data" => $songs,
             "last_update" => \Carbon\Carbon::parse(
-                $lastUpated
+                $lastUpdated
             )->format('Y-m-d H:i:s')
         ];
     }
@@ -129,6 +129,22 @@ class SongController extends Controller
             "status" => 1,
             "data" => $song,
             "msg" => "Song deleted successfully"
+        ];
+    }
+
+    /**
+     * Get last update Date
+     * @return \Illuminate\Http\Response
+     */
+    public function getLastUpdateDate()
+    {
+        $lastUpdated =
+            Song::orderBy('updated_at', 'DESC')->first()->updated_at;
+        return [
+            "status" => 1,
+            "last_update" => \Carbon\Carbon::parse(
+                $lastUpdated
+            )->format('Y-m-d H:i:s')
         ];
     }
 }
